@@ -1,0 +1,50 @@
+.adminAccount{
+    position: absolute;
+    display: flex;
+    top:0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(35,40,41,1) 49%, rgba(0,0,0,1) 100%);
+    overflow-x: hidden;
+}
+
+.adminAccount form{
+    height: 420px;
+    width: 400px;
+    border-radius: 20px;
+    padding-right: 3rem;
+    padding-left: 3rem;
+    padding-bottom: 3rem;
+    border: 2px solid rgb(255, 241, 44);
+    color: white;
+}
+
+.form-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    color: rgb(255, 241, 44);
+    border-bottom: 1px solid rgb(255, 241, 44);
+}
+
+.adminAccount form button{
+    cursor: pointer;
+    background-color: rgb(255, 241, 44);
+    color: black;
+    font-size: 24px;
+    padding: .5rem 2rem;
+    margin-top: 2.5rem;
+    border-radius: 30px;
+}
+
+.adminAccount form button:hover{
+    background-color: black;
+    color: rgb(255, 241, 44);
+    border: 1px solid rgb(255, 241, 44);
+    transition: all .5s;
+}

@@ -1,0 +1,272 @@
+*{
+    outline: none;
+    border: none;
+}
+
+.nav{
+    width: 100vw;
+    height: 350px;
+    position: relative;
+    background-color: rgb(82, 82, 82);
+}
+
+.fondo-nav{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(90%) saturate(100%);
+    -webkit-filter: brightness(90%) saturate(100%);
+    -moz-filter: brightness(90%) saturate(100%);
+}
+
+.paint{
+    position: absolute;
+    top:1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    
+}
+
+.openSideNav, .nav input, .cart{
+    position: absolute;
+}
+
+.nav button{
+    top:1.5rem;
+    left: 1rem;
+    background: none;
+    color: white;
+    font-size: 18px;
+}
+
+.nav button:hover{
+    cursor: pointer;
+    text-shadow: 2px 3px 2px rgba(0,0,0,0.6);
+    transition: all .3s;
+}
+
+.nav input{
+    width: 14rem;
+    top: 1.5rem;
+    right: 7rem;
+    transform: translateX(-.1rem);
+    border-radius: 30px;
+    box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.75);
+    padding: 1rem 1rem;
+}
+
+.cart{
+    width: 60px;
+    top: 1rem;
+    right: 1rem;
+    transform: translateX(-1rem);
+}
+
+.cartItems{
+    position: absolute;
+    top: 4.5rem;
+    right: 1rem;
+    transform:  translateX(-1.5rem);
+    height: 60vh;
+    width: 15vw;
+    min-width: 400px;
+    z-index: 1;
+    overflow-y: scroll;
+}
+
+.cartItems::-webkit-scrollbar{
+    width: 3px;
+    background-color: transparent;
+}
+
+.cartItems::-webkit-scrollbar-thumb{
+    background-color: rgb(255, 241, 44);
+    border-radius: 10px;
+}
+
+.cartItems li{
+    display: flex;
+    background-color: black;
+    border-bottom: 1px solid rgb(255, 241, 44);
+    color: white;
+    padding: .5rem;
+}
+
+.cartItems img{
+    width: 120px;
+}
+
+.descItems{
+    text-align: left;
+    margin-left: 1rem;
+}
+
+.descItems > div{
+    display: flex;
+    width: 100px;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.descItems > div button{
+   background-color: rgb(255, 241, 44);
+   color: black;
+   width: 30%;
+   height: 30px;
+   border-radius: 8px;
+}
+
+.descItems > div label{
+    margin: auto;
+}
+
+.sideNav{
+    position: fixed;
+    height: 100vh;
+    width: 300px;
+    color: white;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: black;
+}
+
+.closeSideNav{
+    position: absolute;
+    top: 1.5rem;
+    right: 1.2rem;
+    background: none;
+    outline: none;
+    border: none;
+    color: white;
+}
+
+.sideNav form{
+    width: 84%;
+    margin: 0 auto;
+    margin-top: 5rem;
+}
+
+.form-group, .form-textarea, .form-input, .form-input-select{
+    width: 100%;
+}
+
+.form-group{
+    position: relative;
+    margin-top: 2rem;
+}
+
+.form-textarea{
+  background-color: rgb(20, 20, 20);
+  height: 150px;
+  color: white;
+  margin-top: 40px;
+  padding: .5rem .5rem;
+}
+
+.form-input, .form-input-select{
+    background-color: transparent;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid white;
+    margin-top: 30px;
+    color: white;
+}
+
+.form-input-select{
+ background-color: black;
+}
+
+.form-label{
+    position: absolute;
+    top:0px;
+    left:0px;
+}
+
+.form-input:focus + .form-label,
+.form-input:not(:placeholder-shown) + .form-label{
+    transform: translateY(-6px) scale(.9);
+    transform-origin: left top;
+    color: rgb(255, 241, 44);
+    transition: all .5s;
+}
+
+.form-textarea:focus + .form-label,
+.form-textarea:not(:placeholder-shown) + .form-label{
+    transform: translateY(-6px) scale(.9);
+    transform-origin: left top;
+    color: rgb(255, 241, 44);
+    transition: all .5s;
+}
+
+.form-input:focus{
+    border-bottom: 1px solid rgb(255, 241, 44);
+    transition: all .5s;
+}
+
+.sendOrder{
+    width: 100%;
+    margin-top: 2.5rem;
+    border-radius: 5px;
+    background-color:rgb(255, 241, 44);
+    font-size: 17px;
+    font-weight: 600;
+    color: black;
+    padding: 1.5rem 0rem;
+}
+
+.sendOrder:hover{
+    cursor: pointer;
+    transform: translateY(-.5rem);
+    background-color: black;
+    color: rgb(255, 241, 44);
+    border: 1px solid rgb(255, 241, 44);
+    transition: all.5s;
+}
+
+.signout{
+    cursor: pointer;
+    background-color: transparent;
+    font-size: 19px;
+    color: white;
+    margin-top: 3rem;
+}
+
+.signout:hover{
+    color: rgb(255, 241, 44);
+}
+
+.categoryList{
+    position: absolute;
+    width: 100vw;
+    bottom: 0px;
+    border-bottom: 1px solid white;
+    background-color: rgb(12, 12, 12);
+    color: white;
+}
+
+.categoryList ul{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+}
+
+.categoryList ul li{
+    border-left: .5px solid white;
+    border-right: .5px solid white;
+    padding: 0rem 1rem;
+}
+
+.categoryList ul li button{
+    background: transparent;
+    border: none;
+}
+
+.categoryList ul li button:hover{
+    color: rgb(255, 241, 44);
+    transition: color .5s;
+}
