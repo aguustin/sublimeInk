@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { getAllProductsRequest, getProductsByCategoryRequest, uploadProductsRequest, addToCartRequest, getCartProductsIpRequest, deleteCartItemRequest } from "../api/stickersRequest";
+import { getAllProductsRequest, getProductsByCategoryRequest, uploadProductsRequest, addToCartRequest, getCartProductsIpRequest, deleteCartItemRequest, searchRequest } from "../api/stickersRequest";
 
 const StickersContext = createContext();
 
@@ -20,7 +20,7 @@ export const StickersContextProvider = ({children}) => {
                 console.log(err);
             })
     }
-    console.log("i:", ip);
+
     const getAllProductsContext = async () => {
         const res = await getAllProductsRequest();
         setAllproducts(res.data);
@@ -38,7 +38,6 @@ export const StickersContextProvider = ({children}) => {
 
     const getCartProductsIpContext = async (ip) => {
         const res = await getCartProductsIpRequest(ip);
-        console.log(res.data[0].productsBuyed);
         setCart(res.data[0].productsBuyed);
     }
 
@@ -49,10 +48,14 @@ export const StickersContextProvider = ({children}) => {
 
     const deleteCartItemContext = async (ip, id) => { //ultimo hecho
         const res = await deleteCartItemRequest(ip, id);
-        console.log("cart: ", cart);
         if(res.status === 204){
             setCart(cart.filter((c) => c._id !== id));
         }
+    }
+
+    const searchContext = async (search) => {
+        const res = await searchRequest(search);
+        setAllproducts(res.data);
     }
 
     return(
@@ -64,7 +67,8 @@ export const StickersContextProvider = ({children}) => {
         allProducts, 
         addToCartContext,
         getCartProductsIpContext,
-        deleteCartItemContext, 
+        deleteCartItemContext,
+        searchContext, 
         cart}}>{children}</StickersContext.Provider>
     )
 }

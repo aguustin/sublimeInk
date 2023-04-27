@@ -7,7 +7,8 @@ import {uploadProductsController,
      getCartProductsIpController, 
      deleteAllProductsController, 
      deleteCartItemController, //ultimo hecho 
-     deleteProductController, 
+     deleteProductController,
+     searchController, 
      findUserController } from "../controllers/stickersControllers.js";
 
 const router = Router();
@@ -31,6 +32,8 @@ router.put('/deleteItem/:ip/:id', deleteCartItemController); //ultimo hecho
 router.delete('/deleteAll', deleteAllProductsController);
 
 router.delete('/:id', deleteProductController);
+
+router.post('/search', searchController);
 
 
 export default router;

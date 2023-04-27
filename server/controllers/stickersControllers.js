@@ -105,7 +105,7 @@ export const getCartProductsIpController = async (req, res) => {
     res.send(response);
 }
 
-export const deleteCartItemController = async (req, res) => { //ultimo hecho
+export const deleteCartItemController = async (req, res) => { 
     const {ip, id} = req.params;
     console.log(ip, " ", id);
     await UserBuy.updateOne(
@@ -113,13 +113,6 @@ export const deleteCartItemController = async (req, res) => { //ultimo hecho
         {$pull: {productsBuyed: {_id : id}}});
     res.sendStatus(204);
 }
-/*
-.updateOne({ "datas": {
-    "$elemMatch": {
-      "id": ObjectId("6350ce45605a1c2f35e4c607"),
-      "report.activityId": ObjectId("6350f1313f586971dfd1effd")
-    }
-  }},{$pull : { "datas.$.report" : { activityId:  ObjectId("6350f13aaa8f2d84071fc3cd")} }})*/
 
 export const deleteAllProductsController = async (req, res) => {
     await Stickers.deleteMany();
@@ -130,4 +123,21 @@ export const deleteProductController = async (req, res) => { //el administrador 
     const id = req.params.id;
     await Stickers.deleteOne({_id: id});
     res.sendStatus(200);
+}
+
+export const searchController = async (req, res) => {
+    const {search} = req.body;
+    console.log(search);
+
+    const searchResponse = await Stickers.find({name:{$regex : search, $options : 'i'}});
+    /*const searchResponse = await UserBuy.aggregate([
+        {$match:{ "productsBuyed.name": search}},
+        {$project: {"productsBuyed":{$filter:{
+            input:"$productsBuyed",
+            as:"productBuyed",
+            cond:{$eq:["$$productBuyed.name", search]}
+        }}}}
+    ]);*/
+
+    res.send(searchResponse);
 }

@@ -24,4 +24,6 @@ export const addToCartRequest = (addToCartObject, ip) => axios.post('/addToCart'
 
 export const getCartProductsIpRequest = (ip) => axios.get(`/getC/${ip}`);
 
-export const deleteCartItemRequest = (ip, id) => axios.put(`/deleteItem/${ip}/${id}`, console.log("as", ip, id));
+export const deleteCartItemRequest = (ip, id) => axios.put(`/deleteItem/${ip}/${id}`);
+
+export const searchRequest = (search) => axios.post('/search', {search});

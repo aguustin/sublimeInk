@@ -1,6 +1,6 @@
 import './navigation.css';
 import cartImg from "../../imgs/cart.png";
-import fondo_nav from "../../imgs/fondo_nav.jpg";
+import fondo_sticker from "../../imgs/fondo_stickers.jpg";
 import pintura from "../../imgs/salpicadura-de-pintura.png";
 //import search from "../../imgs/search.png";
 import { useContext, useEffect, useState } from 'react';
@@ -15,7 +15,8 @@ const Navigation = () => {
          getAllProductsContext,
          getProductsByCategoryContext,
          getCartProductsIpContext,
-         deleteCartItemContext, 
+         deleteCartItemContext,
+         searchContext, 
          cart} = useContext(StickersContext);
     const [sideNav, setSideNav] = useState(false);
     const [cartLayout, setCartLayout] = useState(false);
@@ -164,12 +165,20 @@ const Navigation = () => {
         }
     }
 
+    const searchProduct = async (e) => {
+        e.preventDefault();
+        const search = e.target.elements.search.value;
+        await searchContext(search);
+    }
+
     return(
         <div>
             <nav className='nav'>
-                <img className='fondo-nav' src={fondo_nav} alt=""></img>
+                <img className='fondo-nav' src={fondo_sticker} alt=""></img>
                 <img className='paint' src={pintura} alt=""></img>
-                <input name="search" placeholder="Search"></input>
+                <form onSubmit={(e) => searchProduct(e)}>
+                    <input name="search" placeholder="Search"></input>
+                </form>
                 <button onClick={() => setCartLayout(!cartLayout)}><img className='cart' src={cartImg} alt=""></img></button>
                 {cartLayout ? <CartLayout/> : ''}
                 <button className='openSideNav' type="checkbox" onClick={() => setSideNav(!sideNav)}><label>Pide tu sticker personalizado</label></button>
