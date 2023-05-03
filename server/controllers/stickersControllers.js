@@ -6,20 +6,21 @@ import fs from "fs-extra";
 export const uploadProductsController = async (req, res) => { //subida de productos por parte del administrador
 
     const {category, name, description, price} = req.body;
-
     let image;
-    
-    if(req.files){
+   
+    if(req.files && req.files !== null){
         const result = await uploadImage(req.files.image.tempFilePath);
         await fs.remove(req.files.image.tempFilePath);
         image = {
             url: result.secure_url,
             public_id: result.public_id
         }
+        const resultUpload = await new Stickers({image, category, name, description, price});
+        await resultUpload.save();
+        return res.json(resultUpload); 
+    }else{
+        res.sendStatus(400);
     }
-    const resultUpload = await new Stickers({image, category, name, description, price});
-    await resultUpload.save();
-    return res.json(resultUpload); 
     
 
 }

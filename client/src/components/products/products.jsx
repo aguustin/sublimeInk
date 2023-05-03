@@ -67,9 +67,13 @@ const Products = () => {
                 <div>
                     <p>Price: ${cartItem.price}</p>
                 </div>
-                <button onClick={(e) => rest(e)}>-</button><label>{quantity}</label><button onClick={(e) => sum(e)}>+</button>
-                <button onClick={() => setAddCartLayout(!addCartLayout)}>Cancel</button>
-                <button type="submit">Buy sticker</button>
+                <div className='quantity'>
+                    <button onClick={(e) => rest(e)}>-</button><label>{quantity}</label><button onClick={(e) => sum(e)}>+</button>
+                </div>
+                <div className='buyCancel'>
+                    <button onClick={() => setAddCartLayout(!addCartLayout)}>Cancel</button>
+                    <button type="submit">Buy sticker</button>
+                </div>
             </form>
             </div>
         )

@@ -19,6 +19,7 @@
     -moz-filter: brightness(90%) saturate(100%);
 }
 
+
 .paint{
     position: absolute;
     top:1rem;
@@ -46,8 +47,7 @@
     transition: all .3s;
 }
 
-.nav input{
-    width: 14rem;
+.formSearch input{
     top: 1.5rem;
     right: 7rem;
     transform: translateX(-.1rem);
@@ -55,7 +55,32 @@
     box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.75);
     -webkit-box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.75);
+    background: none;
+    width: 0%;
+}
+
+.searchLabel{
+    position: absolute;
+    right: 8rem;
+    top: 1rem;
+    transform: translateX(-1rem);
+    cursor: pointer;
+}
+
+#openSearch{
+    display: none;
+}
+
+#openSearch:checked ~ .formSearch input{
+    width: 14rem;
+    transition: .3s;
     padding: 1rem 1rem;
+    background-color: white;
+}
+
+#openSearch:checked ~ .searchLabel{
+    transform: translateX(-15rem);
+    transition: .3s;
 }
 
 .cart{
@@ -72,9 +97,10 @@
     transform:  translateX(-1.5rem);
     height: 60vh;
     width: 15vw;
-    min-width: 400px;
+    min-width: 350px;
     z-index: 1;
     overflow-y: scroll;
+    border-radius: 10px;
 }
 
 .cartItems::-webkit-scrollbar{
@@ -97,6 +123,16 @@
 
 .cartItems img{
     width: 120px;
+}
+
+.deleteC{
+    position: absolute;
+    top: .5rem;
+    right: -15rem;
+}
+
+.deleteC img{
+    width: 50px;
 }
 
 .descItems{
@@ -131,7 +167,17 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: black;
+    background-color: rgb(12, 12, 12);
+}
+
+.slideNav{
+    position: absolute;
+    z-index: 3;
+}
+
+.slideNav:checked ~ .sideNav{
+    transform: translateX(20vw);
+    transition: .5s;
 }
 
 .closeSideNav{
@@ -178,7 +224,7 @@
 }
 
 .form-input-select{
- background-color: black;
+    background-color: black;
 }
 
 .form-label{
@@ -257,9 +303,23 @@
 }
 
 .categoryList ul li{
+    position: relative;
+    overflow: hidden;
     border-left: .5px solid white;
     border-right: .5px solid white;
-    padding: 0rem 1rem;
+    padding: 0rem 2rem;
+}
+
+.categoryList ul li button span{
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    border-radius: 30%;
+    background-color: rgb(255, 241, 44);
+    top: -130%;
+    left: -100%;
+    transition: .3s;
+    z-index: 0;
 }
 
 .categoryList ul li button{
@@ -268,6 +328,16 @@
 }
 
 .categoryList ul li button:hover{
-    color: rgb(255, 241, 44);
+    color: black;
     transition: color .5s;
+}
+
+.categoryList ul li button:hover span{
+    left: -10%;
+}
+
+.categoryList ul li button:hover label{
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
 }

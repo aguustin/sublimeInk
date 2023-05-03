@@ -2,7 +2,9 @@ import './navigation.css';
 import cartImg from "../../imgs/cart.png";
 import fondo_sticker from "../../imgs/fondo_stickers.jpg";
 import pintura from "../../imgs/salpicadura-de-pintura.png";
-//import search from "../../imgs/search.png";
+import burguerBar from "../../imgs/burgerBar.png";
+import search from "../../imgs/search.png";
+import trash from "../../imgs/trash.png";
 import { useContext, useEffect, useState } from 'react';
 import AdminContext from '../../context/adminContext';
 import StickersContext from '../../context/stickersContext';
@@ -50,7 +52,7 @@ const Navigation = () => {
             <div className='cartItems'>
                 {cart.map((c) => <li key={c._id}>
                     <div>
-                    <button onClick={(e) => deleteCartItem(e, c._id)}>a</button>
+                    <button className='deleteC' onClick={(e) => deleteCartItem(e, c._id)}><img src={trash} alt=""></img></button>
                         <img src={c.image} alt=""></img>
                     </div>
                     <div className="descItems">
@@ -67,7 +69,7 @@ const Navigation = () => {
 
     const SideNav = () => {
         return(
-            <div>
+            <div >
                 <button className='closeSideNav' type="checkbox" onClick={() => setSideNav(!sideNav)}>Cerrar</button>
                 <form  onSubmit={(e) => sendRequest(e)} encType="multipart/form-data">
                     <div className='form-group'>
@@ -115,7 +117,7 @@ const Navigation = () => {
     const AdminSideNav = () => {
         return(
             <div>
-            <button className='closeSideNav' type="checkbox" onClick={() => setSideNav(!sideNav)}>Cerrar</button>
+            <button className='closeSideNav' type="checkbox" onClick={() => setSideNav(!sideNav)}>X</button>
             <form  onSubmit={(e) => uploadSticker(e)} encType="multipart/form-data">
                 <div className='form-group'>
                     <input className='form-input' type="file" name="image" accept='image/*' placeholder=" " onChange={(e) => chargeImage(e)}></input>
@@ -123,11 +125,11 @@ const Navigation = () => {
                 </div>
                 <div className='form-group'>
                     <select className='form-input-select' name="category" placeholder=" ">
-                        <option value="A" selected>A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
+                        <option value="Animals" selected>Animals</option>
+                        <option value="Robots">Robots</option>
+                        <option value="Games">Games</option>
+                        <option value="Cartoon">Cartoon</option>
+                        <option value="Heroes">Heroes</option>
                     </select>
                     <label className='form-label'>Categoria</label>
                 </div>
@@ -176,19 +178,21 @@ const Navigation = () => {
             <nav className='nav'>
                 <img className='fondo-nav' src={fondo_sticker} alt=""></img>
                 <img className='paint' src={pintura} alt=""></img>
-                <form onSubmit={(e) => searchProduct(e)}>
+                <input id="openSearch" type="checkbox"></input>
+                <label className='searchLabel' for="openSearch"><img src={search} alt=""></img></label>
+                <form className='formSearch' onSubmit={(e) => searchProduct(e)}>
                     <input name="search" placeholder="Search"></input>
                 </form>
                 <button onClick={() => setCartLayout(!cartLayout)}><img className='cart' src={cartImg} alt=""></img></button>
                 {cartLayout ? <CartLayout/> : ''}
-                <button className='openSideNav' type="checkbox" onClick={() => setSideNav(!sideNav)}><label>Pide tu sticker personalizado</label></button>
+                <button className='openSideNav' type="checkbox" onClick={() => setSideNav(!sideNav)}><img src={burguerBar} alt=""></img></button>
                 <div className='categoryList'>
                     <ul>
-                        <li><button onClick={(e) => getProducts(e, "")}>Categoria A</button></li>
-                        <li><button onClick={(e) => getProducts(e, "A")}>Categoria B textLong</button></li>
-                        <li><button onClick={(e) => getProducts(e, "B")}>Categoria B text</button></li>
-                        <li><button onClick={(e) => getProducts(e, "C")}>Categoria C</button></li>
-                        <li><button onClick={(e) => getProducts(e, "D")}>Categoria H textLong</button></li>
+                        <li><button onClick={(e) => getProducts(e, "Animals")}><span></span><label>Animals</label></button></li>
+                        <li><button onClick={(e) => getProducts(e, "Robots")}><span></span><label>Robots</label></button></li>
+                        <li><button onClick={(e) => getProducts(e, "Games")}><span></span><label>Games</label></button></li>
+                        <li><button onClick={(e) => getProducts(e, "Cartoon")}><span></span><label>Cartoon</label></button></li>
+                        <li><button onClick={(e) => getProducts(e, "Heroes")}><span></span><label>Heroes</label></button></li>
                     </ul>
                 </div>
             </nav>
