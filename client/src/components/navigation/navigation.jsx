@@ -20,7 +20,6 @@ const Navigation = () => {
          deleteCartItemContext,
          searchContext, 
          cart} = useContext(StickersContext);
-    const [sideNav, setSideNav] = useState(false);
     const [cartLayout, setCartLayout] = useState(false);
 
     useEffect(() => {
@@ -46,8 +45,12 @@ const Navigation = () => {
         e.preventDefault();
         await deleteCartItemContext(ip, id);
     }
-   
+    
     const CartLayout = () => {
+       /* useEffect(() => {  //ULTIMO HECHO -------------------------------------------------------------
+            let all = cart.map((total, sum = 0) => sum = sum + num);
+        },[]);
+        console.log(sum);*/
         return(
             <div className='cartItems'>
                 {cart.map((c) => <li key={c._id}>
@@ -62,15 +65,14 @@ const Navigation = () => {
                         <p>total: {c.total}</p>
                     </div>   
                 </li>)}
-                <button className='buyAll'>price: $84932</button>      
+                <button className='buyAll'>Total: $84932</button>      
             </div>
         )
     }
 
     const SideNav = () => {
         return(
-            <div >
-                <button className='closeSideNav' type="checkbox" onClick={() => setSideNav(!sideNav)}>Cerrar</button>
+            <div>
                 <form  onSubmit={(e) => sendRequest(e)} encType="multipart/form-data">
                     <div className='form-group'>
                         <input className='form-input' name="name" placeholder=" "></input>
@@ -96,10 +98,6 @@ const Navigation = () => {
         )
     }
 
-    const chargeImage = (e) => {
-        
-    }
-
     const uploadSticker = async (e) => {
        e.preventDefault();
 
@@ -117,15 +115,14 @@ const Navigation = () => {
     const AdminSideNav = () => {
         return(
             <div>
-            <button className='closeSideNav' type="checkbox" onClick={() => setSideNav(!sideNav)}>X</button>
             <form  onSubmit={(e) => uploadSticker(e)} encType="multipart/form-data">
                 <div className='form-group'>
-                    <input className='form-input' type="file" name="image" accept='image/*' placeholder=" " onChange={(e) => chargeImage(e)}></input>
+                    <input className='form-input' type="file" name="image" accept='image/*' placeholder=" "></input>
                     <label className='form-label'>Imagen - opcional -</label>
                 </div>
                 <div className='form-group'>
                     <select className='form-input-select' name="category" placeholder=" ">
-                        <option value="Animals" selected>Animals</option>
+                        <option defaultValue="Animals">Animals</option>
                         <option value="Robots">Robots</option>
                         <option value="Games">Games</option>
                         <option value="Cartoon">Cartoon</option>
@@ -175,6 +172,9 @@ const Navigation = () => {
 
     return(
         <div>
+            <input className='openSideNav' id='openSideNav' type="checkbox"></input>
+            <label className="a" for="openSideNav"><img src={burguerBar} alt=""></img></label>
+            <div className='sideNav'><TypeOfSide/></div>
             <nav className='nav'>
                 <img className='fondo-nav' src={fondo_sticker} alt=""></img>
                 <img className='paint' src={pintura} alt=""></img>
@@ -183,9 +183,8 @@ const Navigation = () => {
                 <form className='formSearch' onSubmit={(e) => searchProduct(e)}>
                     <input name="search" placeholder="Search"></input>
                 </form>
-                <button onClick={() => setCartLayout(!cartLayout)}><img className='cart' src={cartImg} alt=""></img></button>
+                <button className='cartB' onClick={() => setCartLayout(!cartLayout)}><img className='cart' src={cartImg} alt=""></img></button>
                 {cartLayout ? <CartLayout/> : ''}
-                <button className='openSideNav' type="checkbox" onClick={() => setSideNav(!sideNav)}><img src={burguerBar} alt=""></img></button>
                 <div className='categoryList'>
                     <ul>
                         <li><button onClick={(e) => getProducts(e, "Animals")}><span></span><label>Animals</label></button></li>
@@ -196,7 +195,6 @@ const Navigation = () => {
                     </ul>
                 </div>
             </nav>
-            {sideNav ? <div className='sideNav'><TypeOfSide/></div> : null}
         </div>
     )
 }

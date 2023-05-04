@@ -19,24 +19,52 @@
     -moz-filter: brightness(90%) saturate(100%);
 }
 
-
 .paint{
     position: absolute;
     top:1rem;
     left: 50%;
     transform: translateX(-50%);
-    
 }
 
 .openSideNav, .nav input, .cart{
     position: absolute;
 }
 
+.openSideNav{
+    display: none;
+}
+
+.a img{
+    position: fixed;
+    top:1rem;
+    left: 1rem;
+    cursor: pointer;
+    z-index: 3;
+}
+
+#openSideNav:checked ~ .sideNav{
+    transform: translateX(0px);
+    transition: transform .2s;
+}
+
+#openSideNav:not(:checked) ~ .sideNav{
+    transform: translateX(-300px);
+    transition: transform .2s;
+}
+
+#openSideNav:checked ~ .a img{
+    transform: translateX(200px);
+    transition: transform .2s;
+}
+
+#openSideNav:not(:checked) ~ .a img{
+    transform: translateX(10px);
+    transition: transform .2s;
+}
 
 .nav button{
     top:1.5rem;
     left: 1rem;
-    background: none;
     color: white;
     font-size: 18px;
 }
@@ -114,6 +142,7 @@
 }
 
 .cartItems li{
+    position: relative;
     display: flex;
     background-color: black;
     border-bottom: 1px solid rgb(255, 241, 44);
@@ -127,12 +156,15 @@
 
 .deleteC{
     position: absolute;
-    top: .5rem;
-    right: -15rem;
+    background: none;
+    width: 50px;
 }
 
 .deleteC img{
+    position: absolute;
     width: 50px;
+    top:-.5rem;
+    right: -17rem;
 }
 
 .descItems{
@@ -168,17 +200,19 @@
     top: 0;
     left: 0;
     background-color: rgb(12, 12, 12);
+    overflow-y: scroll;
 }
 
-.slideNav{
-    position: absolute;
-    z-index: 3;
+.sideNav::-webkit-scrollbar{
+    width: 1px;
+    background-color: transparent;
 }
 
-.slideNav:checked ~ .sideNav{
-    transform: translateX(20vw);
-    transition: .5s;
+.sideNav::-webkit-scrollbar-thumb{
+    background-color: rgb(255, 241, 44);
+    border-radius: 10px;
 }
+
 
 .closeSideNav{
     position: absolute;
@@ -279,7 +313,8 @@
     background-color: transparent;
     font-size: 19px;
     color: white;
-    margin-top: 3rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .signout:hover{
@@ -334,10 +369,82 @@
 
 .categoryList ul li button:hover span{
     left: -10%;
+    
 }
 
 .categoryList ul li button:hover label{
     position: relative;
     z-index: 1;
     cursor: pointer;
+}
+
+.buyAll{
+    width: 100%;
+    background-color: rgb(12, 12, 12);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: .7rem 0rem;
+}
+
+.buyAll:hover{
+    background-color: rgb(255, 241, 44);
+    color: black;
+    transition: all .5s;
+}
+
+.cartB{
+    background: none;
+}
+
+@media screen and (max-width:525px) {
+
+    .paint{
+        display: none;
+    }
+
+    .searchLabel img{
+        display: none;
+    }
+
+    .formSearch input{
+        width: 30%;
+        padding: .5rem;
+        background-color: white;
+    }
+    
+}
+
+@media screen and (max-width:805px) {
+
+.categoryList ul{
+    margin-right: 2rem;
+}
+
+}
+
+@media screen and (max-width:685px) {
+    .categoryList ul li{
+        padding: 0rem .5rem;
+    }
+    
+}
+
+@media screen and (max-width:570px) {
+
+    .categoryList ul li button{
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width:470px) {
+    .categoryList ul li{
+    min-width: 55px;
+    }
+}
+
+
+@media screen and (max-width:385px) {
+    .cartItems{
+        right: -5vw;
+    }
 }
