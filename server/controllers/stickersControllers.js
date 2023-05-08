@@ -21,8 +21,6 @@ export const uploadProductsController = async (req, res) => { //subida de produc
     }else{
         res.sendStatus(400);
     }
-    
-
 }
 
 export const findUserController = async (req, res) => { //encontrar todos los usuarios (todavia no funciona)
@@ -43,7 +41,6 @@ export const getProductsByCategoryController = async (req, res) => { //obtener l
 
 export const getProductsBySearch = async (req, res) => { //obtener los productos por buscador
     const name = req.body.name;
-    console.log(name);
     const productsBySearch = await Stickers.find({name:{'$regex' : name, '$options' : 'i'}});
     res.send(productsBySearch);
 }
@@ -69,10 +66,9 @@ export const addToCartController = async (req, res) => {  /**añadir info del pr
                 }
                 }
             )
-
             const updateCart = await UserBuy.find({ip: ip});
-
             res.send(updateCart);
+
         }else{
 
             console.log("no existe, creando usuario: ");  //si la ip no existe entonces se crea una nueva ip de compra junto con el primer producto comprado
@@ -89,7 +85,6 @@ export const addToCartController = async (req, res) => {  /**añadir info del pr
                 ]
             });
             await saveUserBuy.save();
-
             res.send(saveUserBuy);
         }
     }else{
@@ -97,7 +92,6 @@ export const addToCartController = async (req, res) => {  /**añadir info del pr
         const a = await UserBuy.find({ip: ip});
         res.send(a);
     }
-    
 }
 
 export const getCartProductsIpController = async (req, res) => {
@@ -136,17 +130,6 @@ export const deleteProductController = async (req, res) => { //el administrador 
 
 export const searchController = async (req, res) => {
     const {search} = req.body;
-    console.log(search);
-
     const searchResponse = await Stickers.find({name:{$regex : search, $options : 'i'}});
-    /*const searchResponse = await UserBuy.aggregate([
-        {$match:{ "productsBuyed.name": search}},
-        {$project: {"productsBuyed":{$filter:{
-            input:"$productsBuyed",
-            as:"productBuyed",
-            cond:{$eq:["$$productBuyed.name", search]}
-        }}}}
-    ]);*/
-
     res.send(searchResponse);
 }

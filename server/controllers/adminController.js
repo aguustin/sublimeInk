@@ -14,16 +14,13 @@ export const saveAdminController = async (req, res) => {
             username: username,
             password: passHash
         });
-
         const response = await saveAdmin.save();
-
         res.send(response);
+
     }else{
         console.log("Las contrasenas no coinciden");
         res.sendStatus(404);
     }
-
-  
 }
 
 export const authAdminController = async (req, res) => {
@@ -31,7 +28,6 @@ export const authAdminController = async (req, res) => {
     const {username, password, repitePassword} = req.body;
 
     if(password === repitePassword){
-
         const searchUser = await Admin.find({username : username});
 
         if(searchUser.length >= 1){
@@ -58,9 +54,6 @@ export const authAdminController = async (req, res) => {
 }
 
 export const deleteAllAdminsController = async (req, res) => {
-
     await Admin.deleteMany();
-
     res.sendStatus(200);
-
 }

@@ -10,27 +10,27 @@ import AdminContext from '../../context/adminContext';
 import StickersContext from '../../context/stickersContext';
 
 const Navigation = () => {
-    const {admin, setAdmin} = useContext(AdminContext);
-    const {ip, getIpContext,
-         uploadProductsContext, 
-         getAllProductsContext,
-         getProductsByCategoryContext,
-         getCartProductsIpContext,
-         deleteCartItemContext,
-         deleteAllCartContext,
-         searchContext, 
-         cart} = useContext(StickersContext);
+    const { admin, setAdmin } = useContext(AdminContext);
+    const { ip, getIpContext,
+        uploadProductsContext,
+        getAllProductsContext,
+        getProductsByCategoryContext,
+        getCartProductsIpContext,
+        deleteCartItemContext,
+        deleteAllCartContext,
+        searchContext,
+        cart } = useContext(StickersContext);
     const [cartLayout, setCartLayout] = useState(false);
 
     useEffect(() => {
-            setAdmin(JSON.parse(localStorage.getItem("admin")));
-            (async () => {
-                await getIpContext();
-                await getCartProductsIpContext(ip);
-            })()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        setAdmin(JSON.parse(localStorage.getItem("admin")));
+        (async () => {
+            await getIpContext();
+            await getCartProductsIpContext(ip);
+        })()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    
+
     const sendRequest = (e) => {
         e.preventDefault();
     }
@@ -45,23 +45,23 @@ const Navigation = () => {
         e.preventDefault();
         await deleteCartItemContext(ip, id);
     }
-    
+
     const CartLayout = () => {
 
         const buyAll = async (e) => {
             e.preventDefault();
             await deleteAllCartContext(ip);
-            
+
         }
 
-        if(cart){
+        if (cart) {
             const result = cart.reduce((sum, c) => sum += c.total, 0);
 
-            return(
+            return (
                 <div className='cartItems'>
                     {cart.map((c) => <li key={c._id}>
                         <div>
-                        <button className='deleteC' onClick={(e) => deleteCartItem(e, c._id)}><img src={trash} alt=""></img></button>
+                            <button className='deleteC' onClick={(e) => deleteCartItem(e, c._id)}><img src={trash} alt=""></img></button>
                             <img src={c.image} alt=""></img>
                         </div>
                         <div className="descItems">
@@ -69,9 +69,9 @@ const Navigation = () => {
                             <p>Price:${c.price}</p>
                             <p>Unities x {c.quantity}</p>
                             <p>total: {c.total}</p>
-                        </div>   
+                        </div>
                     </li>)}
-                    <button className='buyAll' onClick={(e) => buyAll(e)}>Total: ${result}</button>      
+                    <button className='buyAll' onClick={(e) => buyAll(e)}>Total: ${result}</button>
                 </div>
             )
         }
@@ -79,9 +79,9 @@ const Navigation = () => {
     }
 
     const SideNav = () => {
-        return(
+        return (
             <div>
-                <form  onSubmit={(e) => sendRequest(e)} encType="multipart/form-data">
+                <form onSubmit={(e) => sendRequest(e)} encType="multipart/form-data">
                     <div className='form-group'>
                         <input className='form-input' name="name" placeholder=" "></input>
                         <label className='form-label'>Nombre Completo</label>
@@ -107,7 +107,7 @@ const Navigation = () => {
     }
 
     const uploadSticker = async (e) => {
-       e.preventDefault();
+        e.preventDefault();
 
         const stickerObject = {
             image: e.target.elements.image.files[0],
@@ -119,45 +119,45 @@ const Navigation = () => {
 
         await uploadProductsContext(stickerObject);
     }
-    
+
     const AdminSideNav = () => {
-        return(
+        return (
             <div>
-            <form  onSubmit={(e) => uploadSticker(e)} encType="multipart/form-data">
-                <div className='form-group'>
-                    <input className='form-input' type="file" name="image" accept='image/*' placeholder=" "></input>
-                    <label className='form-label'>Imagen - opcional -</label>
-                </div>
-                <div className='form-group'>
-                    <select className='form-input-select' name="category" placeholder=" ">
-                        <option defaultValue="Animals">Animals</option>
-                        <option value="Robots">Robots</option>
-                        <option value="Games">Games</option>
-                        <option value="Cartoon">Cartoon</option>
-                        <option value="Heroes">Heroes</option>
-                    </select>
-                    <label className='form-label'>Categoria</label>
-                </div>
-                <div className='form-group'>
-                    <input className='form-input' name="name" placeholder=" "></input>
-                    <label className='form-label'>Nombre del Sticker</label>
-                </div>
-                <div className='form-group'>
-                    <textarea className='form-textarea' name="description" placeholder=" "></textarea>
-                    <label className='form-label'>Descripcion del sticker</label>
-                </div>
-                <div className='form-group'>
-                    <input className='form-input' type="number" name="price" placeholder=" "></input>
-                    <label className='form-label'>Precio</label>
-                </div>
-                <div>
-                    <button className='sendOrder' type="submit">Subir Sticker</button>
-                </div>
-                <div>
-                    <button className='signout' onClick={(e) => signOut(e)}>Cerrar session</button>
-                </div>
-            </form>
-        </div>
+                <form onSubmit={(e) => uploadSticker(e)} encType="multipart/form-data">
+                    <div className='form-group'>
+                        <input className='form-input' type="file" name="image" accept='image/*' placeholder=" "></input>
+                        <label className='form-label'>Imagen - opcional -</label>
+                    </div>
+                    <div className='form-group'>
+                        <select className='form-input-select' name="category" placeholder=" ">
+                            <option defaultValue="Animals">Animals</option>
+                            <option value="Robots">Robots</option>
+                            <option value="Games">Games</option>
+                            <option value="Cartoon">Cartoon</option>
+                            <option value="Heroes">Heroes</option>
+                        </select>
+                        <label className='form-label'>Categoria</label>
+                    </div>
+                    <div className='form-group'>
+                        <input className='form-input' name="name" placeholder=" "></input>
+                        <label className='form-label'>Nombre del Sticker</label>
+                    </div>
+                    <div className='form-group'>
+                        <textarea className='form-textarea' name="description" placeholder=" "></textarea>
+                        <label className='form-label'>Descripcion del sticker</label>
+                    </div>
+                    <div className='form-group'>
+                        <input className='form-input' type="number" name="price" placeholder=" "></input>
+                        <label className='form-label'>Precio</label>
+                    </div>
+                    <div>
+                        <button className='sendOrder' type="submit">Subir Sticker</button>
+                    </div>
+                    <div>
+                        <button className='signout' onClick={(e) => signOut(e)}>Cerrar session</button>
+                    </div>
+                </form>
+            </div>
         )
     }
 
@@ -165,9 +165,9 @@ const Navigation = () => {
 
     const getProducts = async (e, category) => {
         e.preventDefault();
-        if(category){
+        if (category) {
             await getProductsByCategoryContext(category)
-        }else{
+        } else {
             await getAllProductsContext();
         }
     }
@@ -178,21 +178,21 @@ const Navigation = () => {
         await searchContext(search);
     }
 
-    return(
+    return (
         <div>
             <input className='openSideNav' id='openSideNav' type="checkbox"></input>
-            <label className="a" for="openSideNav"><img src={burguerBar} alt=""></img></label>
-            <div className='sideNav'><TypeOfSide/></div>
+            <label className="a" htmlFor="openSideNav"><img src={burguerBar} alt=""></img></label>
+            <div className='sideNav'><TypeOfSide /></div>
             <nav className='nav'>
                 <img className='fondo-nav' src={fondo_sticker} alt=""></img>
                 <img className='paint' src={pintura} alt=""></img>
                 <input id="openSearch" type="checkbox"></input>
-                <label className='searchLabel' for="openSearch"><img src={search} alt=""></img></label>
+                <label className='searchLabel' htmlFor="openSearch"><img src={search} alt=""></img></label>
                 <form className='formSearch' onSubmit={(e) => searchProduct(e)}>
                     <input name="search" placeholder="Search"></input>
                 </form>
                 <button className='cartB' onClick={() => setCartLayout(!cartLayout)}><img className='cart' src={cartImg} alt=""></img></button>
-                {cartLayout ? <CartLayout/> : ''}
+                {cartLayout ? <CartLayout /> : ''}
                 <div className='categoryList'>
                     <ul>
                         <li className='allList'><button onClick={(e) => getProducts(e)}><span></span><label>All</label></button></li>

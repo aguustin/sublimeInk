@@ -77,15 +77,11 @@ const Products = () => {
             </form>
             </div>
         )
-
     }
 
     const openCartLayout = async (id, image, name, price) => {
-        
         setCartItem({id, image, name, price});
-
         setAddCartLayout(true);
-
     }
 
     return(
