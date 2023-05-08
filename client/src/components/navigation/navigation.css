@@ -14,9 +14,9 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(90%) saturate(100%);
-    -webkit-filter: brightness(90%) saturate(100%);
-    -moz-filter: brightness(90%) saturate(100%);
+    filter: brightness(20%) saturate(100%);
+    -webkit-filter: brightness(50%) saturate(100%);
+    -moz-filter: brightness(50%) saturate(100%);
 }
 
 .paint{
@@ -112,14 +112,16 @@
 }
 
 .cart{
+    position: fixed;
     width: 60px;
     top: 1rem;
     right: 1rem;
     transform: translateX(-1rem);
+    z-index: 2;
 }
 
 .cartItems{
-    position: absolute;
+    position: fixed;
     top: 4.5rem;
     right: 1rem;
     transform:  translateX(-1.5rem);
@@ -439,6 +441,10 @@
 @media screen and (max-width:470px) {
     .categoryList ul li{
     min-width: 55px;
+    }
+
+    .allList{
+        display: none;
     }
 }
 

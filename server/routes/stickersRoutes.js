@@ -6,7 +6,8 @@ import {uploadProductsController,
      addToCartController,
      getCartProductsIpController, 
      deleteAllProductsController, 
-     deleteCartItemController, //ultimo hecho 
+     deleteCartItemController, //ultimo hecho
+     deleteAllCartItemsController, 
      deleteProductController,
      searchController, 
      findUserController } from "../controllers/stickersControllers.js";
@@ -27,7 +28,9 @@ router.post('/addToCart', addToCartController);
 
 router.get('/getC/:ip', getCartProductsIpController);
 
-router.put('/deleteItem/:ip/:id', deleteCartItemController); //ultimo hecho
+router.put('/deleteItem/:ip/:id', deleteCartItemController);
+
+router.put('/deleteAllItem/:ip', deleteAllCartItemsController);
 
 router.delete('/deleteAll', deleteAllProductsController);
 

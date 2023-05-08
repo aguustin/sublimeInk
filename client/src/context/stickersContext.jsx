@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { getAllProductsRequest, getProductsByCategoryRequest, uploadProductsRequest, addToCartRequest, getCartProductsIpRequest, deleteCartItemRequest, searchRequest } from "../api/stickersRequest";
+import { getAllProductsRequest, getProductsByCategoryRequest, uploadProductsRequest, addToCartRequest, getCartProductsIpRequest, deleteCartItemRequest, searchRequest, deleteAllCartRequest } from "../api/stickersRequest";
 
 const StickersContext = createContext();
 
@@ -53,6 +53,11 @@ export const StickersContextProvider = ({children}) => {
         }
     }
 
+    const deleteAllCartContext = async (ip) => {
+        await deleteAllCartRequest(ip);
+        setCart('');
+    }
+
     const searchContext = async (search) => {
         const res = await searchRequest(search);
         setAllproducts(res.data);
@@ -68,6 +73,7 @@ export const StickersContextProvider = ({children}) => {
         addToCartContext,
         getCartProductsIpContext,
         deleteCartItemContext,
+        deleteAllCartContext,
         searchContext, 
         cart}}>{children}</StickersContext.Provider>
     )

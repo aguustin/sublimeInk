@@ -9,7 +9,6 @@ import { useContext, useEffect, useState } from 'react';
 import AdminContext from '../../context/adminContext';
 import StickersContext from '../../context/stickersContext';
 
-
 const Navigation = () => {
     const {admin, setAdmin} = useContext(AdminContext);
     const {ip, getIpContext,
@@ -18,6 +17,7 @@ const Navigation = () => {
          getProductsByCategoryContext,
          getCartProductsIpContext,
          deleteCartItemContext,
+         deleteAllCartContext,
          searchContext, 
          cart} = useContext(StickersContext);
     const [cartLayout, setCartLayout] = useState(false);
@@ -47,27 +47,35 @@ const Navigation = () => {
     }
     
     const CartLayout = () => {
-       /* useEffect(() => {  //ULTIMO HECHO -------------------------------------------------------------
-            let all = cart.map((total, sum = 0) => sum = sum + num);
-        },[]);
-        console.log(sum);*/
-        return(
-            <div className='cartItems'>
-                {cart.map((c) => <li key={c._id}>
-                    <div>
-                    <button className='deleteC' onClick={(e) => deleteCartItem(e, c._id)}><img src={trash} alt=""></img></button>
-                        <img src={c.image} alt=""></img>
-                    </div>
-                    <div className="descItems">
-                        <p>{c.name}</p>
-                        <p>Price:${c.price}</p>
-                        <p>Unities x {c.quantity}</p>
-                        <p>total: {c.total}</p>
-                    </div>   
-                </li>)}
-                <button className='buyAll'>Total: $84932</button>      
-            </div>
-        )
+
+        const buyAll = async (e) => {
+            e.preventDefault();
+            await deleteAllCartContext(ip);
+            
+        }
+
+        if(cart){
+            const result = cart.reduce((sum, c) => sum += c.total, 0);
+
+            return(
+                <div className='cartItems'>
+                    {cart.map((c) => <li key={c._id}>
+                        <div>
+                        <button className='deleteC' onClick={(e) => deleteCartItem(e, c._id)}><img src={trash} alt=""></img></button>
+                            <img src={c.image} alt=""></img>
+                        </div>
+                        <div className="descItems">
+                            <p>{c.name}</p>
+                            <p>Price:${c.price}</p>
+                            <p>Unities x {c.quantity}</p>
+                            <p>total: {c.total}</p>
+                        </div>   
+                    </li>)}
+                    <button className='buyAll' onClick={(e) => buyAll(e)}>Total: ${result}</button>      
+                </div>
+            )
+        }
+
     }
 
     const SideNav = () => {
@@ -157,7 +165,7 @@ const Navigation = () => {
 
     const getProducts = async (e, category) => {
         e.preventDefault();
-        if(category.length > 0){
+        if(category){
             await getProductsByCategoryContext(category)
         }else{
             await getAllProductsContext();
@@ -187,6 +195,7 @@ const Navigation = () => {
                 {cartLayout ? <CartLayout/> : ''}
                 <div className='categoryList'>
                     <ul>
+                        <li className='allList'><button onClick={(e) => getProducts(e)}><span></span><label>All</label></button></li>
                         <li><button onClick={(e) => getProducts(e, "Animals")}><span></span><label>Animals</label></button></li>
                         <li><button onClick={(e) => getProducts(e, "Robots")}><span></span><label>Robots</label></button></li>
                         <li><button onClick={(e) => getProducts(e, "Games")}><span></span><label>Games</label></button></li>

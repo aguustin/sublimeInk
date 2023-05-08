@@ -108,11 +108,19 @@ export const getCartProductsIpController = async (req, res) => {
 
 export const deleteCartItemController = async (req, res) => { 
     const {ip, id} = req.params;
-    console.log(ip, " ", id);
     await UserBuy.updateOne(
         {ip: ip},
         {$pull: {productsBuyed: {_id : id}}});
     res.sendStatus(204);
+}
+
+export const deleteAllCartItemsController = async (req, res) => {
+    const {ip} = req.params;
+    await UserBuy.updateOne(
+        {ip: ip},
+        {$pull: {productsBuyed: {price: {$gt: 0}}}}
+    );
+    res.sendStatus(200);
 }
 
 export const deleteAllProductsController = async (req, res) => {
