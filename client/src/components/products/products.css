@@ -4,8 +4,8 @@
     height:100%;
     background: rgb(0,0,0);
     background: linear-gradient(90deg, rgba(12, 12, 12,1) 0%, rgba(35,40,41,1) 49%, rgba(12, 12, 12,1) 100%);
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding-top: 1rem;
+    padding-bottom: 3rem;
     margin: 0 auto;
 }
 
@@ -54,6 +54,10 @@
     background-color: black;
     color: rgb(255, 241, 44);
     transition: all .5s;
+}
+
+.stickers img{
+    margin-top: 35px;
 }
 
 .cartItem{
